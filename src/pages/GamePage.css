@@ -1,0 +1,14 @@
+.game-container {
+    text-align: center;
+}
+.game-box {
+    display: inline-block;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+    padding: 1.1%;
+    margin: 1%;
+    width:95%;
+    min-height : 70vh 
+}
+

@@ -1,0 +1,36 @@
+.next-button {
+    font-size: 20px;
+    font-weight: bolder;
+    cursor: pointer;
+    border: 5px solid transparent;
+    border-image: linear-gradient(90deg,#f53a6d,rgba(55,5,255,.67)) 1;
+    border-radius: 10px;
+}
+.button-box {
+    display: inline-block;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+    padding: 1.1%;
+    margin: 1%;
+    max-width:80%;
+  }
+
+.next-button:hover {
+    cursor: pointer;
+    border-image: none;
+    background: linear-gradient(90deg,#f53a6d,rgba(55,5,255,.67));
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.image {
+    width: "48%";
+    height: "100%",
+}
+
+.image:hover {
+    cursor: pointer;
+    border-image: none;
+    background: linear-gradient(90deg,#f53a6d,rgba(55,5,255,.67));
+}
