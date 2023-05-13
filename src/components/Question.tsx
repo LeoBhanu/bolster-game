@@ -14,6 +14,7 @@ type QuestionProps = {
   setScore: () => void;
   setSelectedOption: React.Dispatch<React.SetStateAction<string>>;
   setCurrentQuestion: React.Dispatch<React.SetStateAction<number>>;
+  currentQuestion: number;
 };
 
 const Question = ({
@@ -22,6 +23,7 @@ const Question = ({
   setScore,
   setSelectedOption,
   setCurrentQuestion,
+  currentQuestion,
 }: QuestionProps) => {
   const [count, setCount] = useState(1);
   const [randomValue, setRandomValue] = useState(false);
@@ -39,7 +41,7 @@ const Question = ({
   useEffect(() => {
     if (count >= 16) {
       setCount(1);
-      setCurrentQuestion(question.id);
+      setCurrentQuestion(currentQuestion + 1);
       setSelectedOption("");
       setRandomValue(false);
     }
@@ -63,14 +65,16 @@ const Question = ({
     setScore();
     setSelectedOption(option);
     setCount(1);
-    setCurrentQuestion(question.id);
+    setCurrentQuestion(currentQuestion + 1);
   };
 
   return (
     <div>
       <ProgressBar timer={15000} count={count} />
       {count}
-      <h3>{`${question?.id} : Please choose one among the following images.`}</h3>
+      <h3>{`${
+        currentQuestion + 1
+      } : Please choose one among the following images.`}</h3>
       <div className="question-box">
         <div className="image">
           <img
@@ -97,7 +101,7 @@ const Question = ({
       <div
         onClick={() => {
           setCount(1);
-          setCurrentQuestion(question.id);
+          setCurrentQuestion(currentQuestion + 1);
           setSelectedOption("");
         }}
       >

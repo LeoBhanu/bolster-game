@@ -65,6 +65,17 @@ const images: Question[] = [
   },
 ];
 
+function shuffleArray(array: Question[]) {
+  const shuffledArray = [...array];
+  for (let i = shuffledArray.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [shuffledArray[i], shuffledArray[j]] = [shuffledArray[j], shuffledArray[i]];
+  }
+  return shuffledArray;
+}
+
+const QuestionList = shuffleArray(images)
+
 function GamePage() {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [selectedOption, setSelectedOption] = useState("");
@@ -79,8 +90,7 @@ function GamePage() {
         timer: 1000,
       });
       setResult((result) => result + 1);
-    }
-    else {
+    } else {
       Swal.fire({
         icon: "warning",
         title: "Oops! its wrong",
@@ -95,14 +105,19 @@ function GamePage() {
     <div className="game-container">
       <div className="game-box">
         {currentQuestion >= 10 ? (
-          <ResultPage result={result} setCurrentQuestion={setCurrentQuestion} setResult={setResult}/>
+          <ResultPage
+            result={result}
+            setCurrentQuestion={setCurrentQuestion}
+            setResult={setResult}
+          />
         ) : (
           <Question
-            question={images[currentQuestion]}
+            question={QuestionList[currentQuestion]}
             total={images.length}
             setScore={setScore}
             setSelectedOption={setSelectedOption}
             setCurrentQuestion={setCurrentQuestion}
+            currentQuestion={currentQuestion}
           />
         )}
       </div>
