@@ -34,6 +34,14 @@ const SignUp = ({ result, setSign }: Result) => {
   } = useForm<IFormInput>();
 
   const onSubmit: SubmitHandler<IFormInput> = (data) => {
+    const now = new Date();
+
+    const year = now.getFullYear();
+    const month = now.getMonth() + 1; 
+    const day = now.getDate(); 
+
+    // Format the date and time as a string
+    const dateTimeString = `${year}-${month}-${day}`;
     setUser((prevUser: User) => ({
       ...prevUser,
       firstName: data.firstName,
@@ -44,13 +52,23 @@ const SignUp = ({ result, setSign }: Result) => {
     // @ts-ignore: local Storage type ignored
     let topScores = JSON.parse(localStorage.getItem("topScores"));
     if (topScores) {
+      if(topScores.length >= 10){
+        // @ts-ignore: a,b type ignored
+          topScores.sort((a, b) => b?.score - a?.score)
+          topScores.pop()
+      }
       topScores.push({
         name: data.firstName + " " + data.lastName,
         score: result,
+        date: dateTimeString,
       });
     } else {
       topScores = [
-        { name: data.firstName + " " + data.lastName, score: result },
+        {
+          name: data.firstName + " " + data.lastName,
+          score: result,
+          date: dateTimeString,
+        },
       ];
     }
     localStorage.setItem("topScores", JSON.stringify(topScores));

@@ -6,6 +6,7 @@ import SignUp from "./SignUp";
 interface Score {
   name?: string;
   score?: number;
+  date: string;
 }
 
 type Results = {
@@ -18,7 +19,7 @@ const ResultPage = ({ result, setCurrentQuestion, setResult }: Results) => {
   // @ts-ignore: local Storage type ignored
   const scores = JSON.parse(localStorage.getItem("topScores"));
   let sortedScores: Score[] = [];
-  if (scores.length) {
+  if (scores?.length) {
     // @ts-ignore: local Storage type ignored
     sortedScores = scores.sort((a: Score, b: Score) => b?.score - a?.score);
   }
@@ -29,7 +30,7 @@ const ResultPage = ({ result, setCurrentQuestion, setResult }: Results) => {
     // @ts-ignore: local Storage type ignored
     let topScores = JSON.parse(localStorage.getItem("topScores"));
     let sortedScores: Score[] = [];
-    if (scores.length) {
+    if (scores?.length) {
       // @ts-ignore: local Storage type ignored
       sortedScores = scores.sort((a: Score, b: Score) => b?.score - a?.score);
     }
@@ -72,12 +73,14 @@ const ResultPage = ({ result, setCurrentQuestion, setResult }: Results) => {
               <span className="span1">Rank</span>{" "}
               <span className="span2">Name</span>{" "}
               <span className="span1">Score</span>
+              <span className="span1">Achieved on</span>{" "}
             </div>
             {scoreList?.map((item, index) => (
               <div className="top-score">
                 <span className="span1">{index + 1}</span>{" "}
                 <span className="span2">{item.name}</span>{" "}
                 <span className="color-text span1">{item.score}</span>
+                <span className="span1">{item.date}</span>{" "}
               </div>
             ))}
           </div>
