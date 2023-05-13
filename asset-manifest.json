@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/bolster-game/static/css/main.bbcef1ae.css",
-    "main.js": "/bolster-game/static/js/main.f56634c5.js",
+    "main.js": "/bolster-game/static/js/main.264b70f4.js",
     "static/js/787.28cb0dcd.chunk.js": "/bolster-game/static/js/787.28cb0dcd.chunk.js",
     "static/media/2-fake.png": "/bolster-game/static/media/2-fake.81898b55a86c55d4ab66.png",
     "static/media/2-correct.png": "/bolster-game/static/media/2-correct.59285c05e182cc4811ba.png",
@@ -25,11 +25,11 @@
     "static/media/7-correct.png": "/bolster-game/static/media/7-correct.1b4066cac127909cc17d.png",
     "index.html": "/bolster-game/index.html",
     "main.bbcef1ae.css.map": "/bolster-game/static/css/main.bbcef1ae.css.map",
-    "main.f56634c5.js.map": "/bolster-game/static/js/main.f56634c5.js.map",
+    "main.264b70f4.js.map": "/bolster-game/static/js/main.264b70f4.js.map",
     "787.28cb0dcd.chunk.js.map": "/bolster-game/static/js/787.28cb0dcd.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.bbcef1ae.css",
-    "static/js/main.f56634c5.js"
+    "static/js/main.264b70f4.js"
   ]
 }
