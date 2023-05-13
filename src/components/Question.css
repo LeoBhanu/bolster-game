@@ -34,3 +34,18 @@
     border-image: none;
     background: linear-gradient(90deg,#f53a6d,rgba(55,5,255,.67));
 }
+
+.question-box {
+   display: flex;
+   justify-content: space-around;
+   align-items: center;
+}
+
+@media screen and (max-width: 900px) {
+   .question-box {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+   }
+  }

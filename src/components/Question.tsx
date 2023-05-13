@@ -64,7 +64,6 @@ const Question = ({
     setSelectedOption(option);
     setCount(1);
     setCurrentQuestion(question.id);
-
   };
 
   return (
@@ -72,13 +71,7 @@ const Question = ({
       <ProgressBar timer={15000} count={count} />
       {count}
       <h3>{`${question?.id} : Please choose one among the following images.`}</h3>
-      <div
-        style={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-around",
-        }}
-      >
+      <div className="question-box">
         <div className="image">
           <img
             style={{ width: "95%", height: "100%" }}
