@@ -1,6 +1,7 @@
 import { useState } from "react";
 import "./SignUp.css";
 import { useForm, SubmitHandler } from "react-hook-form";
+import Swal from "sweetalert2";
 
 interface IFormInput {
   firstName: string;
@@ -18,9 +19,11 @@ interface User {
 interface Result {
   result: number;
   setSign: React.Dispatch<React.SetStateAction<boolean>>;
+  signed: boolean;
+  setSigned: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const SignUp = ({ result, setSign }: Result) => {
+const SignUp = ({ result, setSign, signed, setSigned }: Result) => {
   const [user, setUser] = useState<User>({
     firstName: "",
     lastName: "",
@@ -37,8 +40,8 @@ const SignUp = ({ result, setSign }: Result) => {
     const now = new Date();
 
     const year = now.getFullYear();
-    const month = now.getMonth() + 1; 
-    const day = now.getDate(); 
+    const month = now.getMonth() + 1;
+    const day = now.getDate();
 
     // Format the date and time as a string
     const dateTimeString = `${year}-${month}-${day}`;
@@ -52,10 +55,10 @@ const SignUp = ({ result, setSign }: Result) => {
     // @ts-ignore: local Storage type ignored
     let topScores = JSON.parse(localStorage.getItem("topScores"));
     if (topScores) {
-      if(topScores.length >= 10){
+      if (topScores.length >= 10) {
         // @ts-ignore: a,b type ignored
-          topScores.sort((a, b) => b?.score - a?.score)
-          topScores.pop()
+        topScores.sort((a, b) => b?.score - a?.score);
+        topScores.pop();
       }
       topScores.push({
         name: data.firstName + " " + data.lastName,
@@ -73,39 +76,56 @@ const SignUp = ({ result, setSign }: Result) => {
     }
     localStorage.setItem("topScores", JSON.stringify(topScores));
     setSign(false);
+    setSigned(true);
   };
 
   return (
     <div>
-      <form onSubmit={handleSubmit(onSubmit)}>
+      {signed ? (
         <div>
-          <input
-            {...register("firstName", { required: true, maxLength: 20 })}
-            placeholder="First Name"
-            type="text"
-          />
+          <h3>Results already signed</h3>
+          <div>
+            <div
+              onClick={() => {
+                setSign(false);
+              }}
+              className="button-box color-text"
+            >
+              Go Back to results
+            </div>
+          </div>
         </div>
-        <div>
-          <input
-            {...register("lastName", { required: true, maxLength: 20 })}
-            placeholder="Last Name"
-            type="text"
-          />
-        </div>
-        <div>
-          <input
-            {...register("email", {
-              pattern: /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}/i,
-            })}
-            type="email"
-            placeholder="Email"
-          />
-        </div>
+      ) : (
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <div>
+            <input
+              {...register("firstName", { required: true, maxLength: 20 })}
+              placeholder="First Name"
+              type="text"
+            />
+          </div>
+          <div>
+            <input
+              {...register("lastName", { required: true, maxLength: 20 })}
+              placeholder="Last Name"
+              type="text"
+            />
+          </div>
+          <div>
+            <input
+              {...register("email", {
+                pattern: /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}/i,
+              })}
+              type="email"
+              placeholder="Email"
+            />
+          </div>
 
-        <div>
-          <input type="submit" />
-        </div>
-      </form>
+          <div>
+            <input type="submit" />
+          </div>
+        </form>
+      )}
     </div>
   );
 };

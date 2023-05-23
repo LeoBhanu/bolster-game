@@ -25,6 +25,7 @@ const ResultPage = ({ result, setCurrentQuestion, setResult }: Results) => {
   }
   const [sign, setSign] = useState(false);
   const [scoreList, setScoreList] = useState<Score[]>(sortedScores);
+  const [signed,setSigned] = useState(false);
 
   useEffect(() => {
     // @ts-ignore: local Storage type ignored
@@ -39,13 +40,17 @@ const ResultPage = ({ result, setCurrentQuestion, setResult }: Results) => {
       setScoreList(sortedScores);
     }
   }, [sign]);
+  useEffect(()=>{
+    localStorage.removeItem("currentQ")
+    localStorage.removeItem("result")
+  },[])
   return (
     <div>
       <div className="color-text">
         <h1>Results</h1>
       </div>
       {sign ? (
-        <SignUp result={result} setSign={setSign} />
+        <SignUp result={result} setSign={setSign} signed={signed} setSigned={setSigned}/>
       ) : (
         <>
           <div

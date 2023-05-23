@@ -74,12 +74,19 @@ function shuffleArray(array: Question[]) {
   return shuffledArray;
 }
 
-const QuestionList = shuffleArray(images)
-
 function GamePage() {
-  const [currentQuestion, setCurrentQuestion] = useState(0);
+  const quesNo = Number(localStorage.getItem("currentQ")) || 0;
+  const storedResult = Number(localStorage.getItem("result")) || 0;
+  const [currentQuestion, setCurrentQuestion] = useState(quesNo);
   const [selectedOption, setSelectedOption] = useState("");
-  const [result, setResult] = useState(0);
+  const [result, setResult] = useState(storedResult);
+  const QuestionList = shuffleArray(images);
+
+  const [list, setList] = useState(QuestionList);
+
+  useEffect(() => {
+    if (quesNo === 0) setList(shuffleArray(images));
+  }, []);
 
   const setScore = () => {
     if (selectedOption === "image2") {
@@ -90,6 +97,7 @@ function GamePage() {
         timer: 1000,
       });
       setResult((result) => result + 1);
+      localStorage.setItem("result", (result + 1).toString());
     } else {
       Swal.fire({
         icon: "warning",
@@ -99,6 +107,7 @@ function GamePage() {
       });
     }
     setCurrentQuestion(currentQuestion + 1);
+    localStorage.setItem("currentQ", (currentQuestion + 1).toString());
   };
 
   return (
@@ -112,7 +121,7 @@ function GamePage() {
           />
         ) : (
           <Question
-            question={QuestionList[currentQuestion]}
+            question={list[currentQuestion]}
             total={images.length}
             setScore={setScore}
             setSelectedOption={setSelectedOption}

@@ -47,6 +47,9 @@ function Home() {
         <GamePage />
       ) : (
         <>
+          <div onClick={() => setStart(true)}>
+            <div className="box start-button">START THE GAME</div>
+          </div>
           <div className="box">
             <h1>
               <span className="color-text">About the game</span>
@@ -67,9 +70,6 @@ function Home() {
                 })}
               </ol>
             </h3>
-          </div>
-          <div onClick={() => setStart(true)}>
-            <div className="box start-button">START THE GAME</div>
           </div>
         </>
       )}

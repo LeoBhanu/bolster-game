@@ -44,6 +44,7 @@ const Question = ({
       setCurrentQuestion(currentQuestion + 1);
       setSelectedOption("");
       setRandomValue(false);
+      setScore()
     }
   }, [count]);
 
